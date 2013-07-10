@@ -7,7 +7,7 @@ var datos = fs.readFileSync("index.html");
 var buf = new Buffer(datos);
 
 app.get('/', function(request, response) {
-  response.send( but.toString() );
+  response.send( buf.toString() );
   //buf.toString();
 });
 
