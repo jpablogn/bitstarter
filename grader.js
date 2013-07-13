@@ -40,21 +40,39 @@ var assertFileExists = function(infile) {
     return instr;
 };
 
-var assertUrlExist = function(infile){
+var assertUrlExists = function(infile){
 
 	rest.get(infile).on('complete', function(result) {
 	  if (result instanceof Error) {
-		sys.puts('Error: ' + result.message);
+		//sys.puts('Error: ' + result.message + '\n');
 		//this.retry(5000); // try again after 5 sec
-       console.log("%s does not exist. Exiting.", instr);
+        console.log("%s does not exist. Exiting.", infile);
         process.exit(1); // http://nodejs.org/api/process.html#process_process_exit_code		
 		
 	  } else {
 		//sys.puts(result);
-		fs.createWriteStream("url.txt", result);
-		return ("url.txt");
+		//console.log("%s exist!", infile);
+		//fs.createWriteStream("./url.txt", result);
+		return (result); // "./url.txt"
 	  }
+	});
+	
+	/*
+	rest.get(infile).on('success', function(result){
+		console.log("Success: %s", result.message + '\n');
+		process.exit(1); // http://nodejs.org/api/process.html#process_process_exit_code
+	});
 
+	rest.get(infile).on('error', function(result){
+		console.log("Error: %s", result.message + '\n');
+		process.exit(1); // http://nodejs.org/api/process.html#process_process_exit_code
+	});
+
+	rest.get(infile).on('fail', function(result){
+		console.log("Fail: %s", result.message  + '\n');
+		process.exit(1); // http://nodejs.org/api/process.html#process_process_exit_code
+	});
+	*/
 };
 
 var cheerioHtmlFile = function(htmlfile) {
